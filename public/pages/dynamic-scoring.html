@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Sustainability Scoring System</title>
+    <link rel="stylesheet" href="/styles/dynamic-scoring.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/demo-hub.html" class="back-link">← Back to Demo Hub</a>
+
+        <div class="header">
+            <h1>📊 Dynamic Batch-Specific Sustainability Scoring</h1>
+            <p>Real-time A-E grades and 0-100 scores using GS1 Digital Link extensions to track specific batches within product SKUs</p>
+        </div>
+
+        <!-- Current Batch Score Display -->
+        <div class="scoring-overview">
+            <div class="score-display">
+                <div class="batch-info">
+                    <div style="font-size: 1rem; font-weight: bold; color: #1e293b; margin-bottom: 5px;">Organic Cotton T-Shirts (SKU)</div>
+                    <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 8px;">GTIN: 8901030123456</div>
+                    <div class="batch-id">+ Batch AI(10): LOT2024A127</div>
+                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">GS1 Digital Link with Application Identifiers</div>
+                </div>
+
+                <div class="grade-circle grade-A">A</div>
+                <div class="score-numerical">87/100</div>
+                <div class="last-updated">Last updated: 2 minutes ago</div>
+                <div class="live-indicator">
+                    <div class="pulse-dot"></div>
+                    LIVE BATCH SCORING
+                </div>
+
+                <div class="score-trend">
+                    <span class="trend-arrow trend-up">↑</span>
+                    <span class="trend-text">+3 points from logistics optimization</span>
+                </div>
+            </div>
+
+            <div class="score-display">
+                <div class="batch-info">
+                    <div style="font-size: 1rem; font-weight: bold; color: #1e293b; margin-bottom: 5px;">Recycled Plastic Bottles (SKU)</div>
+                    <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 8px;">GTIN: 8901030456789</div>
+                    <div class="batch-id">+ Batch AI(10): LOT2024B089</div>
+                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">GS1 Digital Link with Application Identifiers</div>
+                </div>
+
+                <div class="grade-circle grade-B">B</div>
+                <div class="score-numerical">73/100</div>
+                <div class="last-updated">Last updated: 15 minutes ago</div>
+                <div class="live-indicator">
+                    <div class="pulse-dot"></div>
+                    LIVE BATCH SCORING
+                </div>
+
+                <div class="score-trend">
+                    <span class="trend-arrow trend-down">↓</span>
+                    <span class="trend-text">-5 points from cert expiry warning</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inputs Breakdown -->
+        <div class="inputs-breakdown">
+            <div class="breakdown-title">
+                📋 Scoring Inputs (GTIN: 8901030123456 + Batch LOT2024A127)
+            </div>
+
+            <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #0ea5e9;">
+                <h4 style="color: #0369a1; margin-bottom: 10px;">🔗 GS1 Digital Link Structure:</h4>
+                <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: #1e293b;">
+                    <div><strong>Base GTIN:</strong> 8901030123456 (identifies the product SKU)</div>
+                    <div><strong>+ AI(10):</strong> LOT2024A127 (batch/lot number)</div>
+                    <div><strong>+ AI(17):</strong> 241215 (expiry date)</div>
+                    <div><strong>+ AI(21):</strong> 987654321 (serial number)</div>
+                    <div style="margin-top: 10px; color: #0369a1;"><strong>Digital Link URL:</strong> https://id.gs1.org/01/8901030123456/10/LOT2024A127/17/241215/21/987654321</div>
+                </div>
+            </div>
+
+            <div class="inputs-grid">
+                <div class="input-category">
+                    <div class="category-header">
+                        <div class="category-title">🧪 Materials</div>
+                        <div class="category-score">92/100</div>
+                    </div>
+                    <div class="input-details">
+                        <div class="input-item">
+                            <span class="input-label">Organic Cotton:</span>
+                            <span class="input-value">100% Certified</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Source Distance:</span>
+                            <span class="input-value">247km (Local)</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Water Usage:</span>
+                            <span class="input-value">2.3L/kg (Excellent)</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Pesticides:</span>
+                            <span class="input-value">Zero Synthetic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-category">
+                    <div class="category-header">
+                        <div class="category-title">🏭 Manufacturing</div>
+                        <div class="category-score">85/100</div>
+                    </div>
+                    <div class="input-details">
+                        <div class="input-item">
+                            <span class="input-label">Energy Source:</span>
+                            <span class="input-value">87% Renewable</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">CO₂ Emissions:</span>
+                            <span class="input-value">1.4kg/unit</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Water Recycling:</span>
+                            <span class="input-value">94% Recovered</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Worker Standards:</span>
+                            <span class="input-value">SA8000 Certified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-category">
+                    <div class="category-header">
+                        <div class="category-title">📦 Packaging</div>
+                        <div class="category-score">89/100</div>
+                    </div>
+                    <div class="input-details">
+                        <div class="input-item">
+                            <span class="input-label">Material:</span>
+                            <span class="input-value">100% Recycled Cardboard</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Recyclability:</span>
+                            <span class="input-value">95%</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Weight:</span>
+                            <span class="input-value">0.12kg/unit (Minimal)</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">FSC Certified:</span>
+                            <span class="input-value">Yes (FSC-C123456)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-category">
+                    <div class="category-header">
+                        <div class="category-title">🚚 Logistics</div>
+                        <div class="category-score">81/100</div>
+                    </div>
+                    <div class="input-details">
+                        <div class="input-item">
+                            <span class="input-label">Transport Mode:</span>
+                            <span class="input-value">Electric Truck</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Distance:</span>
+                            <span class="input-value">847km</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Route Optimization:</span>
+                            <span class="input-value">23% Improvement</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Carbon Offset:</span>
+                            <span class="input-value">150% Purchased</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-category">
+                    <div class="category-header">
+                        <div class="category-title">✅ Verification Level</div>
+                        <div class="category-score">95/100</div>
+                    </div>
+                    <div class="input-details">
+                        <div class="input-item">
+                            <span class="input-label">Data Completeness:</span>
+                            <span class="input-value">28/28 Points</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Blockchain Verified:</span>
+                            <span class="input-value">100% Steps</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Third-party Audits:</span>
+                            <span class="input-value">Quarterly</span>
+                        </div>
+                        <div class="input-item">
+                            <span class="input-label">Cert Status:</span>
+                            <span class="input-value">All Current</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Updates -->
+        <div class="dynamic-updates">
+            <div class="updates-header">
+                <div class="updates-title">
+                    📡 Dynamic Updates
+                </div>
+                <div class="auto-refresh">
+                    <span class="refresh-icon">⏳</span>
+                    Auto-refresh: 30s
+                </div>
+            </div>
+
+            <div class="update-timeline">
+                <div class="update-item score-increase">
+                    <div class="update-icon">📈</div>
+                    <div class="update-content">
+                        <div class="update-text">Score increased to A (87/100)</div>
+                        <div class="update-details">Logistics optimization improved route efficiency by 23%</div>
+                    </div>
+                    <div class="update-time">2 min ago</div>
+                </div>
+
+                <div class="update-item data-update">
+                    <div class="update-icon">🔗</div>
+                    <div class="update-content">
+                        <div class="update-text">New batch data linked via GS1 Digital Link</div>
+                        <div class="update-details">GTIN + AI(10) batch identifier scanned at logistics stage</div>
+                    </div>
+                    <div class="update-time">5 min ago</div>
+                </div>
+
+                <div class="update-item cert-expiry">
+                    <div class="update-icon">⚠️</div>
+                    <div class="update-content">
+                        <div class="update-text">Batch certificate expiry detected</div>
+                        <div class="update-details">AI(17) expiry date approaching for batch LOT2024B089 - score reduced by 5 points</div>
+                    </div>
+                    <div class="update-time">15 min ago</div>
+                </div>
+
+                <div class="update-item score-increase">
+                    <div class="update-icon">✅</div>
+                    <div class="update-content">
+                        <div class="update-text">Packaging data verified</div>
+                        <div class="update-details">FSC certification confirmed, recyclability score updated</div>
+                    </div>
+                    <div class="update-time">1 hour ago</div>
+                </div>
+
+                <div class="update-item data-update">
+                    <div class="update-icon">🏭</div>
+                    <div class="update-content">
+                        <div class="update-text">Manufacturing scan completed</div>
+                        <div class="update-details">Energy audit shows 87% renewable usage, water recycling at 94%</div>
+                    </div>
+                    <div class="update-time">3 hours ago</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Comparison -->
+        <div class="batch-comparison">
+            <div class="comparison-title">🔍 Multiple Batch Comparison</div>
+
+            <div class="batches-grid">
+                <div class="batch-card">
+                    <div class="batch-grade grade-A">A</div>
+                    <div class="batch-id-small">LOT2024A127</div>
+                    <div class="batch-score-small">87/100</div>
+                    <div class="batch-status status-current">Current</div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-grade grade-B">B</div>
+                    <div class="batch-id-small">LOT2024B089</div>
+                    <div class="batch-score-small">73/100</div>
+                    <div class="batch-status status-expiring">Cert Expiring</div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-grade grade-A">A</div>
+                    <div class="batch-id-small">LOT2024A098</div>
+                    <div class="batch-score-small">91/100</div>
+                    <div class="batch-status status-current">Current</div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-grade grade-C">C</div>
+                    <div class="batch-id-small">LOT2024C034</div>
+                    <div class="batch-score-small">68/100</div>
+                    <div class="batch-status status-expired">Cert Expired</div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-grade grade-B">B</div>
+                    <div class="batch-id-small">LOT2024B156</div>
+                    <div class="batch-score-small">78/100</div>
+                    <div class="batch-status status-current">Current</div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-grade grade-A">A</div>
+                    <div class="batch-id-small">LOT2024A203</div>
+                    <div class="batch-score-small">89/100</div>
+                    <div class="batch-status status-current">Current</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/dynamic-scoring.js"></script>
+</body>
+</html>

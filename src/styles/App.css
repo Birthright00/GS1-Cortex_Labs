@@ -690,3 +690,160 @@
     gap: 20px;
   }
 }
+
+/* View Score Button */
+.btn-view-score {
+  width: 100%;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-view-score:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+/* Comparison Checkbox */
+.product-comparison-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.product-comparison-checkbox:hover {
+  background: #dbeafe;
+}
+
+.product-comparison-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #0ea5e9;
+}
+
+.product-comparison-checkbox label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0369a1;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Comparison Bar */
+.comparison-bar {
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comparison-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.comparison-badge {
+  background: white;
+  color: #0369a1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.comparison-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-clear-comparison {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-clear-comparison:hover {
+  background: white;
+  color: #0369a1;
+}
+
+.btn-compare {
+  background: white;
+  color: #0369a1;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-compare:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-compare:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .comparison-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .comparison-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn-clear-comparison,
+  .btn-compare {
+    width: 100%;
+  }
+}

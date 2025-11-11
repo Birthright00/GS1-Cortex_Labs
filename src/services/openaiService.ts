@@ -298,3 +298,181 @@ export function isOpenAIConfigured(): boolean {
   return !!import.meta.env.VITE_OPENAI_API_KEY &&
          import.meta.env.VITE_OPENAI_API_KEY !== 'your_openai_api_key_here'
 }
+
+/**
+ * Dynamic Sustainability Scoring Types
+ */
+export interface ScoringInput {
+  productName: string
+  gtin: string
+  batchId: string
+  supplierName?: string
+  baseSustainabilityScore?: number
+}
+
+export interface ScoringCategory {
+  title: string
+  score: number
+  details: {
+    label: string
+    value: string
+  }[]
+}
+
+export interface DynamicScoringResult {
+  grade: string
+  gradeClass: string
+  score: number
+  trend: 'up' | 'down' | 'stable'
+  trendText: string
+  categories: ScoringCategory[]
+}
+
+/**
+ * Calculate dynamic sustainability scoring using OpenAI
+ */
+export async function calculateDynamicScoring(
+  input: ScoringInput
+): Promise<DynamicScoringResult> {
+  try {
+    const timestamp = new Date().toISOString()
+
+    const prompt = `You are a sustainability and supply chain expert. Calculate a comprehensive sustainability score for this product batch.
+
+**Product Information:**
+- Product Name: ${input.productName}
+- GTIN: ${input.gtin}
+- Batch ID: ${input.batchId}
+- Supplier: ${input.supplierName || 'Unknown'}
+- Base Sustainability Score: ${input.baseSustainabilityScore || 'N/A'}/10
+- Request ID: ${timestamp}
+
+**Task:**
+Generate a detailed sustainability scoring breakdown across 5 categories:
+
+1. **Materials** (Score 0-100): Analyze raw materials, sourcing distance, water usage, pesticides/chemicals
+2. **Manufacturing** (Score 0-100): Energy sources, CO2 emissions, water recycling, worker standards
+3. **Packaging** (Score 0-100): Material type, recyclability, weight, certifications
+4. **Logistics** (Score 0-100): Transport mode, distance, route optimization, carbon offsetting
+5. **Verification** (Score 0-100): Data completeness, blockchain verification, audits, certifications
+
+For each category, provide:
+- A score out of 100
+- 4 specific metrics with realistic values
+
+Calculate:
+- **Overall Score**: Weighted average (0-100)
+- **Grade**: A+ (95-100), A (85-94), B (75-84), C (65-74), D (50-64), E (<50)
+- **Trend**: Whether score is improving/declining
+- **Trend Text**: Brief explanation of recent change
+
+**IMPORTANT:** Base calculations on the product type. For example:
+- Organic cotton = High materials score, good manufacturing
+- Electronics = Lower materials, higher manufacturing emissions
+- Packaging = Depends on recyclability
+- Generate UNIQUE realistic data for each product
+
+**Return ONLY valid JSON:**
+
+{
+  "grade": "A",
+  "gradeClass": "grade-A",
+  "score": 87,
+  "trend": "up",
+  "trendText": "+3 points from logistics optimization",
+  "categories": [
+    {
+      "title": "🧪 Materials",
+      "score": 92,
+      "details": [
+        { "label": "Primary Material", "value": "100% Organic Cotton" },
+        { "label": "Source Distance", "value": "247km (Local)" },
+        { "label": "Water Usage", "value": "2.3L/kg (Excellent)" },
+        { "label": "Pesticides", "value": "Zero Synthetic" }
+      ]
+    },
+    {
+      "title": "🏭 Manufacturing",
+      "score": 85,
+      "details": [
+        { "label": "Energy Source", "value": "87% Renewable" },
+        { "label": "CO₂ Emissions", "value": "1.4kg/unit" },
+        { "label": "Water Recycling", "value": "94% Recovered" },
+        { "label": "Worker Standards", "value": "SA8000 Certified" }
+      ]
+    },
+    {
+      "title": "📦 Packaging",
+      "score": 89,
+      "details": [
+        { "label": "Material", "value": "100% Recycled Cardboard" },
+        { "label": "Recyclability", "value": "95%" },
+        { "label": "Weight", "value": "0.12kg/unit (Minimal)" },
+        { "label": "FSC Certified", "value": "Yes" }
+      ]
+    },
+    {
+      "title": "🚚 Logistics",
+      "score": 81,
+      "details": [
+        { "label": "Transport Mode", "value": "Electric Truck" },
+        { "label": "Distance", "value": "847km" },
+        { "label": "Route Optimization", "value": "23% Improvement" },
+        { "label": "Carbon Offset", "value": "150% Purchased" }
+      ]
+    },
+    {
+      "title": "✅ Verification",
+      "score": 95,
+      "details": [
+        { "label": "Data Completeness", "value": "28/28 Points" },
+        { "label": "Blockchain Verified", "value": "100% Steps" },
+        { "label": "Third-party Audits", "value": "Quarterly" },
+        { "label": "Cert Status", "value": "All Current" }
+      ]
+    }
+  ]
+}
+
+Generate realistic, scientifically accurate sustainability data based on the product type.`
+
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        {
+          role: 'system',
+          content: 'You are an expert in sustainability scoring, environmental impact assessment, and supply chain transparency. Generate accurate, realistic sustainability metrics. Always respond with valid JSON only.'
+        },
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      temperature: 0.8,
+      max_tokens: 2000,
+      response_format: { type: 'json_object' },
+      seed: Date.now()
+    })
+
+    const content = response.choices[0]?.message?.content
+    if (!content) {
+      throw new Error('No response from OpenAI')
+    }
+
+    const result = JSON.parse(content) as DynamicScoringResult
+
+    // Validate the response structure
+    if (!result.categories || !Array.isArray(result.categories)) {
+      throw new Error('Invalid response format from OpenAI')
+    }
+
+    return result
+  } catch (error) {
+    console.error('Error calling OpenAI API for scoring:', error)
+    throw new Error(
+      error instanceof Error
+        ? `Failed to calculate sustainability score: ${error.message}`
+        : 'Failed to calculate sustainability score'
+    )
+  }
+}

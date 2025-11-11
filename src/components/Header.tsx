@@ -47,9 +47,9 @@ function Header({ onSearch }: HeaderProps) {
         <div className="nav-tabs">
           <Link to="/" className="nav-tab active">🏠 Suppliers</Link>
           <Link to="/predictive-analytics" className="nav-tab">🔮 Predictive Analytics</Link>
+          <Link to="/dynamic-scoring" className="nav-tab">📊 Dynamic Scoring</Link>
+          <Link to="/fraud-detection" className="nav-tab">🛡️ Fraud Detection</Link>
           <a href="/demo-hub.html" className="nav-tab">🎯 All Features</a>
-          <a href="#" className="nav-tab">📦 Products</a>
-          <a href="#" className="nav-tab">🔬 Verification</a>
         </div>
       </div>
     </div>

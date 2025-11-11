@@ -1,11 +1,28 @@
 import { Supplier } from '../types'
+import { useNavigate } from 'react-router-dom'
 
 interface SupplierCardProps {
   supplier: Supplier
   onProductClick: (productId: string) => void
+  selectedForComparison: Set<string>
+  onToggleComparison: (productId: string) => void
 }
 
-function SupplierCard({ supplier, onProductClick }: SupplierCardProps) {
+function SupplierCard({ supplier, onProductClick, selectedForComparison, onToggleComparison }: SupplierCardProps) {
+  const navigate = useNavigate()
+
+  const handleViewScore = (product: typeof supplier.products[0]) => {
+    navigate('/dynamic-scoring', {
+      state: {
+        productName: product.name,
+        gtin: `890103${Math.floor(Math.random() * 900000 + 100000)}`, // Generate GTIN
+        batchId: `LOT2024${String.fromCharCode(65 + Math.floor(Math.random() * 26))}${Math.floor(Math.random() * 900 + 100)}`,
+        supplierName: supplier.name,
+        sustainabilityScore: product.sustainabilityScore
+      }
+    })
+  }
+
   return (
     <div className="supplier-card">
       <div className="supplier-header">
@@ -54,16 +71,33 @@ function SupplierCard({ supplier, onProductClick }: SupplierCardProps) {
         </div>
         <div className="products-grid">
           {supplier.products.map(product => (
-            <div
-              key={product.id}
-              className="product-item"
-              onClick={() => onProductClick(product.id)}
-            >
-              <div className="product-image">{product.icon}</div>
-              <div className="product-name">{product.name}</div>
-              <div className="product-score">
-                🌱 {product.sustainabilityScore}/10
+            <div key={product.id} className="product-item">
+              <div className="product-comparison-checkbox">
+                <input
+                  type="checkbox"
+                  id={`compare-${product.id}`}
+                  checked={selectedForComparison.has(product.id)}
+                  onChange={() => onToggleComparison(product.id)}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <label htmlFor={`compare-${product.id}`}>Compare</label>
               </div>
+              <div onClick={() => onProductClick(product.id)} style={{ cursor: 'pointer' }}>
+                <div className="product-image">{product.icon}</div>
+                <div className="product-name">{product.name}</div>
+                <div className="product-score">
+                  🌱 {product.sustainabilityScore}/10
+                </div>
+              </div>
+              <button
+                className="btn-view-score"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleViewScore(product)
+                }}
+              >
+                📊 View Score
+              </button>
             </div>
           ))}
         </div>

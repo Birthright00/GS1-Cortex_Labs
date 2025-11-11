@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import PlatformOverview from './components/PlatformOverview'
 import SearchFilters from './components/SearchFilters'
@@ -9,7 +10,17 @@ import { mockSuppliers } from './utils/mockData'
 import { rankSuppliersByIntent, generateResultInsight } from './utils/aiSearch'
 import './styles/App.css'
 
+interface ComparisonProduct {
+  productName: string
+  gtin: string
+  batchId: string
+  supplierName: string
+  sustainabilityScore: number
+  productId: string
+}
+
 function App() {
+  const navigate = useNavigate()
   const [suppliers, setSuppliers] = useState<Supplier[]>(mockSuppliers)
   const [filters, setFilters] = useState<FilterOptions>({
     location: 'all',
@@ -21,6 +32,7 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [aiInsight, setAiInsight] = useState<string>('')
+  const [selectedForComparison, setSelectedForComparison] = useState<Set<string>>(new Set())
 
   const handleFilterChange = (newFilters: FilterOptions) => {
     setFilters(newFilters)
@@ -90,6 +102,51 @@ function App() {
     setSuppliers(filtered)
   }
 
+  const handleToggleComparison = (productId: string) => {
+    setSelectedForComparison(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(productId)) {
+        newSet.delete(productId)
+      } else {
+        newSet.add(productId)
+      }
+      return newSet
+    })
+  }
+
+  const handleCompareSelected = () => {
+    if (selectedForComparison.size < 2) {
+      alert('Please select at least 2 products to compare')
+      return
+    }
+
+    // Gather all selected products data
+    const comparisonData: ComparisonProduct[] = []
+
+    mockSuppliers.forEach(supplier => {
+      supplier.products.forEach(product => {
+        if (selectedForComparison.has(product.id)) {
+          comparisonData.push({
+            productName: product.name,
+            gtin: `890103${Math.floor(Math.random() * 900000 + 100000)}`,
+            batchId: `LOT2024${String.fromCharCode(65 + Math.floor(Math.random() * 26))}${Math.floor(Math.random() * 900 + 100)}`,
+            supplierName: supplier.name,
+            sustainabilityScore: product.sustainabilityScore,
+            productId: product.id
+          })
+        }
+      })
+    })
+
+    // Navigate to dynamic scoring with comparison data
+    navigate('/dynamic-scoring', {
+      state: {
+        compareMode: true,
+        products: comparisonData
+      }
+    })
+  }
+
   return (
     <div className="app">
       <Header onSearch={handleSearch} />
@@ -120,9 +177,35 @@ function App() {
           </div>
         </div>
 
+        {selectedForComparison.size > 0 && (
+          <div className="comparison-bar">
+            <div className="comparison-info">
+              <span className="comparison-badge">{selectedForComparison.size}</span>
+              <span>products selected for comparison</span>
+            </div>
+            <div className="comparison-actions">
+              <button
+                className="btn-clear-comparison"
+                onClick={() => setSelectedForComparison(new Set())}
+              >
+                Clear All
+              </button>
+              <button
+                className="btn-compare"
+                onClick={handleCompareSelected}
+                disabled={selectedForComparison.size < 2}
+              >
+                Compare Selected
+              </button>
+            </div>
+          </div>
+        )}
+
         <SuppliersGrid
           suppliers={suppliers}
           onProductClick={setSelectedProduct}
+          selectedForComparison={selectedForComparison}
+          onToggleComparison={handleToggleComparison}
         />
       </div>
 

@@ -4,9 +4,11 @@ import SupplierCard from './SupplierCard'
 interface SuppliersGridProps {
   suppliers: Supplier[]
   onProductClick: (productId: string) => void
+  selectedForComparison: Set<string>
+  onToggleComparison: (productId: string) => void
 }
 
-function SuppliersGrid({ suppliers, onProductClick }: SuppliersGridProps) {
+function SuppliersGrid({ suppliers, onProductClick, selectedForComparison, onToggleComparison }: SuppliersGridProps) {
   return (
     <div className="suppliers-grid">
       {suppliers.map(supplier => (
@@ -14,6 +16,8 @@ function SuppliersGrid({ suppliers, onProductClick }: SuppliersGridProps) {
           key={supplier.id}
           supplier={supplier}
           onProductClick={onProductClick}
+          selectedForComparison={selectedForComparison}
+          onToggleComparison={onToggleComparison}
         />
       ))}
     </div>

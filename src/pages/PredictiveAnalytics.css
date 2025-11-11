@@ -61,7 +61,7 @@
     opacity: 0.7;
 }
 
-.header {
+.predictive-analytics-page .header {
     text-align: center;
     margin-bottom: 40px;
     padding: 40px;
@@ -71,7 +71,7 @@
     overflow: hidden;
 }
 
-.header::before {
+.predictive-analytics-page .header::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -87,14 +87,14 @@
     to { transform: rotate(360deg); }
 }
 
-.header h1 {
+.predictive-analytics-page .header h1 {
     font-size: 2.5rem;
     margin-bottom: 15px;
     position: relative;
     z-index: 2;
 }
 
-.header p {
+.predictive-analytics-page .header p {
     font-size: 1.2rem;
     opacity: 0.9;
     position: relative;

@@ -57,13 +57,37 @@ export interface PredictiveAnalysisResult {
 }
 
 /**
+ * Get product characteristics for more detailed AI analysis
+ */
+function getProductCharacteristics(productName: string): string {
+  const name = productName.toLowerCase()
+
+  if (name.includes('cotton') || name.includes('textile') || name.includes('t-shirt')) {
+    return 'Product Type: TEXTILE - Lightweight (0.15kg/unit), compressible, moderate packaging requirements'
+  } else if (name.includes('packaging') || name.includes('biodegradable')) {
+    return 'Product Type: PACKAGING MATERIAL - Very light (0.05kg/unit), bulky volume, requires careful stacking'
+  } else if (name.includes('solar') || name.includes('power bank')) {
+    return 'Product Type: ELECTRONICS - Medium weight (0.3kg/unit), fragile lithium batteries, special handling required'
+  } else if (name.includes('led') || name.includes('bulb') || name.includes('light')) {
+    return 'Product Type: ELECTRONICS - Light (0.08kg/unit), fragile glass components, careful packaging needed'
+  } else {
+    return 'Product Type: GENERAL - Medium weight (0.2kg/unit), standard packaging'
+  }
+}
+
+/**
  * Calls OpenAI API to calculate predictive sustainability analytics
  */
 export async function calculatePredictiveAnalytics(
   input: DeliveryCalculationInput
 ): Promise<PredictiveAnalysisResult> {
   try {
-    const prompt = `You are an AI sustainability and logistics expert. Analyze the following delivery scenario and provide detailed predictions:
+    // Add timestamp to ensure unique responses
+    const timestamp = new Date().toISOString()
+
+    const prompt = `You are an AI sustainability and logistics expert. Analyze the following UNIQUE delivery scenario and provide detailed predictions. IMPORTANT: Generate different realistic data for each request - do not use cached or template responses.
+
+**UNIQUE Request ID: ${timestamp}**
 
 **Order Details:**
 - Product: ${input.product}
@@ -73,6 +97,25 @@ export async function calculatePredictiveAnalytics(
 - Distance: ${input.distance} km
 - Required Delivery Date: ${input.deliveryDate}
 - Priority: ${input.priority}
+
+**Product-Specific Considerations:**
+${getProductCharacteristics(input.product)}
+
+**Instructions:**
+- For TEXTILES (cotton t-shirts): Lightweight, moderate bulk, standard packaging, CO2 ~1-3kg per unit
+- For PACKAGING (biodegradable): Very lightweight, large volume, fragile, CO2 ~0.5-2kg per unit
+- For ELECTRONICS (solar power banks, LED bulbs): Medium weight, fragile, careful handling needed, CO2 ~2-5kg per unit
+- Adjust costs based on QUANTITY:
+  - Small orders (<500 units): Higher per-unit cost
+  - Medium orders (500-1000 units): Standard pricing
+  - Large orders (>2000 units): Bulk discounts (20-30% lower per unit)
+- Adjust based on PRIORITY:
+  - Economy: -30% cost, +50% time
+  - Standard: Base pricing
+  - Urgent: +40% cost, -30% time
+  - Express: +100% cost, -60% time
+- Calculate realistic CO2 emissions based on actual product weight and transport method
+- Generate DIFFERENT numbers for each product type - use product characteristics to vary calculations
 
 **Task:**
 Generate 4 different delivery method options with realistic calculations for:
@@ -89,11 +132,26 @@ For each delivery method, calculate:
 - Average days for delivery (decimal number)
 - Sustainability grade (A+, A, B, C, D, or F)
 - Environmental impact description
+- Set "recommended": true for the BEST option based on priority:
+  * For Economy/Standard priority: Choose lowest CO2 with reasonable cost/time
+  * For Urgent priority: Choose fastest with acceptable sustainability
+  * For Express priority: Choose absolute fastest option
+  * ONLY mark ONE option as recommended
 
-Also provide:
-- A standard route with distance, transit time, fuel consumption, CO2 emissions, and total cost
-- An AI-optimized route with the same metrics showing improvements
-- Total savings calculation for the entire order
+Also provide route comparison:
+- **Standard Route**: Calculate based on typical routing from ${input.fromLocation} to ${input.toLocation}
+  - Use actual distance: ${input.distance} km as baseline
+  - Calculate realistic fuel consumption based on product weight and distance
+  - Include detailed route description mentioning actual cities/stops
+- **AI-Optimized Route**: Show 10-40% improvements over standard
+  - Reduced distance through better routing
+  - Lower fuel consumption via efficient transport modes
+  - Significant CO2 reduction (20-40%)
+  - Cost savings from optimization
+  - Include optimized route description
+- **Total Savings**: Calculate based on quantity (${input.quantity} units) and per-unit cost difference
+
+**CRITICAL:** Make route data DIFFERENT for each product/quantity/priority combination. Heavier products = more fuel consumption. Larger quantities = bigger total savings.
 
 **IMPORTANT:** Return ONLY valid JSON in this exact format, no additional text:
 
@@ -112,28 +170,76 @@ Also provide:
       "gradeClass": "score-a",
       "impact": "23% lower CO₂ than standard truck delivery",
       "recommended": true
+    },
+    {
+      "id": "2",
+      "name": "Standard Truck Direct",
+      "icon": "🚚",
+      "time": "...",
+      "co2": "...",
+      "cost": "...",
+      "efficiency": "...",
+      "days": "...",
+      "grade": "B",
+      "gradeClass": "score-b",
+      "impact": "...",
+      "recommended": false
+    },
+    {
+      "id": "3",
+      "name": "Air Freight Express",
+      "icon": "✈️",
+      "time": "...",
+      "co2": "...",
+      "cost": "...",
+      "efficiency": "...",
+      "days": "...",
+      "grade": "D",
+      "gradeClass": "score-d",
+      "impact": "...",
+      "recommended": false
+    },
+    {
+      "id": "4",
+      "name": "Rail + Electric Last Mile",
+      "icon": "🚆",
+      "time": "...",
+      "co2": "...",
+      "cost": "...",
+      "efficiency": "...",
+      "days": "...",
+      "grade": "A+",
+      "gradeClass": "score-a",
+      "impact": "...",
+      "recommended": false
     }
   ],
   "routeComparison": {
     "standard": {
-      "distance": "1,347 km",
-      "transitTime": "18.5 hours",
-      "fuelConsumption": "89.2L",
-      "co2Emissions": "2.7kg/unit",
-      "totalCost": "$18.90/unit",
-      "route": "Route description"
+      "distance": "[CALCULATE: ~${input.distance + 100} km based on standard routing]",
+      "transitTime": "[CALCULATE based on distance and product type]",
+      "fuelConsumption": "[CALCULATE: varies by product weight - heavier = more fuel]",
+      "co2Emissions": "[CALCULATE per unit based on fuel and product]",
+      "totalCost": "[CALCULATE per unit: higher for small quantities, urgent priority]",
+      "route": "[Describe actual route from ${input.fromLocation} to ${input.toLocation} with city names]"
     },
     "optimized": {
-      "distance": "1,247 km (-7.4%)",
-      "transitTime": "16.2 hours (-12.4%)",
-      "fuelConsumption": "73.8L (-17.3%)",
-      "co2Emissions": "1.8kg/unit (-33.3%)",
-      "totalCost": "$12.40/unit (-34.4%)",
-      "route": "Route description"
+      "distance": "[CALCULATE: 10-30% less than standard]",
+      "transitTime": "[CALCULATE: 15-40% faster]",
+      "fuelConsumption": "[CALCULATE: 20-40% reduction]",
+      "co2Emissions": "[CALCULATE: 25-45% lower per unit]",
+      "totalCost": "[CALCULATE: 20-35% cost reduction per unit]",
+      "route": "[Describe optimized route with specific improvements]"
     },
-    "savings": "$3,250"
+    "savings": "[CALCULATE: (standard cost - optimized cost) × ${input.quantity} units]"
   }
 }
+
+**REMEMBER:**
+- Cotton t-shirts (500 units) should have DIFFERENT numbers than LED bulbs (1,000 units)
+- Economy priority should have LOWER costs than Express priority
+- Use the product weight to calculate realistic fuel consumption and CO2
+- Larger quantities should show bigger total savings amounts
 
 Generate realistic, scientifically accurate data based on actual logistics and sustainability metrics.`
 
@@ -142,16 +248,17 @@ Generate realistic, scientifically accurate data based on actual logistics and s
       messages: [
         {
           role: 'system',
-          content: 'You are an expert in logistics, supply chain optimization, and environmental sustainability. You provide accurate, data-driven predictions for delivery routes and environmental impact. Always respond with valid JSON only.'
+          content: 'You are an expert in logistics, supply chain optimization, and environmental sustainability. You provide accurate, data-driven predictions for delivery routes and environmental impact. Always respond with valid JSON only. Generate unique, realistic calculations for each request based on the specific product, quantity, and priority level.'
         },
         {
           role: 'user',
           content: prompt
         }
       ],
-      temperature: 0.7,
+      temperature: 0.9,
       max_tokens: 2000,
-      response_format: { type: 'json_object' }
+      response_format: { type: 'json_object' },
+      seed: Date.now() // Add seed for more variation
     })
 
     const content = response.choices[0]?.message?.content

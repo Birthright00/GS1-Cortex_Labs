@@ -132,11 +132,12 @@ For each delivery method, calculate:
 - Average days for delivery (decimal number)
 - Sustainability grade (A+, A, B, C, D, or F)
 - Environmental impact description
-- Set "recommended": true for the BEST option based on priority:
-  * For Economy/Standard priority: Choose lowest CO2 with reasonable cost/time
-  * For Urgent priority: Choose fastest with acceptable sustainability
-  * For Express priority: Choose absolute fastest option
-  * ONLY mark ONE option as recommended
+- Set "recommended": true for ONLY ONE option based on the priority level (${input.priority}):
+  * For Economy priority: RECOMMEND Rail + Electric Last Mile (cheapest + most sustainable)
+  * For Standard priority: RECOMMEND Electric Truck + Sea Freight (balanced)
+  * For Urgent priority: RECOMMEND Standard Truck Direct (fast + reasonable cost)
+  * For Express priority: RECOMMEND Air Freight Express (fastest delivery)
+  * CRITICAL: Mark ALL other options as "recommended": false
 
 Also provide route comparison:
 - **Standard Route**: Calculate based on typical routing from ${input.fromLocation} to ${input.toLocation}
@@ -153,7 +154,13 @@ Also provide route comparison:
 
 **CRITICAL:** Make route data DIFFERENT for each product/quantity/priority combination. Heavier products = more fuel consumption. Larger quantities = bigger total savings.
 
-**IMPORTANT:** Return ONLY valid JSON in this exact format, no additional text:
+**IMPORTANT:** Return ONLY valid JSON in this exact format, no additional text.
+
+Based on priority "${input.priority}", set the correct recommendation:
+- If Economy: Set "recommended": true ONLY for Rail + Electric Last Mile (id: "4")
+- If Standard: Set "recommended": true ONLY for Electric Truck + Sea Freight (id: "1")
+- If Urgent: Set "recommended": true ONLY for Standard Truck Direct (id: "2")
+- If Express: Set "recommended": true ONLY for Air Freight Express (id: "3")
 
 {
   "deliveryOptions": [
@@ -161,15 +168,15 @@ Also provide route comparison:
       "id": "1",
       "name": "Electric Truck + Sea Freight",
       "icon": "🚛",
-      "time": "5-7 days",
-      "co2": "1.8kg",
-      "cost": "$12.40",
-      "efficiency": "94%",
-      "days": "6.2",
-      "grade": "A",
-      "gradeClass": "score-a",
-      "impact": "23% lower CO₂ than standard truck delivery",
-      "recommended": true
+      "time": "[Calculate]",
+      "co2": "[Calculate]kg",
+      "cost": "$[Calculate]",
+      "efficiency": "[Calculate]%",
+      "days": "[Calculate]",
+      "grade": "[A+/A/B/C/D]",
+      "gradeClass": "score-[a/b/c/d]",
+      "impact": "[Calculate impact description]",
+      "recommended": false
     },
     {
       "id": "2",

@@ -17,11 +17,37 @@ const PredictiveAnalytics = () => {
 
   // Form state
   const [product, setProduct] = useState('Organic Cotton T-Shirts - 500 units')
-  const [fromLocation] = useState('Jakarta, Indonesia')
+  const [fromLocation, setFromLocation] = useState('Jakarta, Indonesia')
   const [toLocation, setToLocation] = useState('Singapore')
   const [deliveryDate, setDeliveryDate] = useState('2024-05-15')
   const [priority, setPriority] = useState('Standard')
-  const [distance] = useState(1247)
+  const [distance, setDistance] = useState(1247)
+
+  // Location options with estimated distances to Singapore
+  const supplierLocations = [
+    { name: 'Jakarta, Indonesia', distance: 1247 },
+    { name: 'Bangkok, Thailand', distance: 1438 },
+    { name: 'Ho Chi Minh City, Vietnam', distance: 1077 },
+    { name: 'Manila, Philippines', distance: 2406 },
+    { name: 'Kuala Lumpur, Malaysia', distance: 316 },
+    { name: 'Yangon, Myanmar', distance: 2089 },
+    { name: 'Phnom Penh, Cambodia', distance: 1036 },
+    { name: 'Dhaka, Bangladesh', distance: 3141 },
+    { name: 'Mumbai, India', distance: 4127 },
+    { name: 'Shenzhen, China', distance: 2708 },
+    { name: 'Hong Kong, China', distance: 2578 },
+    { name: 'Taipei, Taiwan', distance: 2993 },
+    { name: 'Seoul, South Korea', distance: 4681 },
+    { name: 'Tokyo, Japan', distance: 5320 }
+  ]
+
+  const handleLocationChange = (location: string) => {
+    setFromLocation(location)
+    const selected = supplierLocations.find(loc => loc.name === location)
+    if (selected) {
+      setDistance(selected.distance)
+    }
+  }
 
   // Results state
   const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOption[]>([])
@@ -117,10 +143,17 @@ const PredictiveAnalytics = () => {
 
             <div className="form-group">
               <label className="form-label">From (Supplier Location)</label>
-              <div className="location-display">
-                📍 {fromLocation}
-                <div className="distance-badge">{distance} km</div>
-              </div>
+              <select
+                className="form-select"
+                value={fromLocation}
+                onChange={(e) => handleLocationChange(e.target.value)}
+              >
+                {supplierLocations.map((location) => (
+                  <option key={location.name} value={location.name}>
+                    {location.name} ({location.distance} km to Singapore)
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-group">

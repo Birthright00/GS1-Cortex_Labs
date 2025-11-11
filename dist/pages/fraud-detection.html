@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fraud Detection & Anomaly Detection</title>
+    <link rel="stylesheet" href="/styles/fraud-detection.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/demo-hub.html" class="back-link">← Back to Demo Hub</a>
+
+        <div class="header">
+            <h1>🛡 AI Fraud Detection & Anomaly Detection</h1>
+            <p>Advanced machine learning algorithms detect certification fraud and supply chain anomalies in real-time</p>
+        </div>
+
+        <!-- AI Dashboard -->
+        <div class="ai-dashboard">
+            <!-- Fraud Detection Panel -->
+            <div class="detection-panel">
+                <div class="panel-title">
+                    🛡️ Certification Fraud Detection
+                    <div class="status-indicator status-active"></div>
+                </div>
+
+                <div class="detection-stats">
+                    <div class="stat-card">
+                        <div class="stat-value success">99.7%</div>
+                        <div class="stat-label">Detection Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value warning">23</div>
+                        <div class="stat-label">Alerts Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value danger">7</div>
+                        <div class="stat-label">High Priority</div>
+                    </div>
+                </div>
+
+                <div class="alerts-feed">
+                    <div class="alert-item high">
+                        <div class="alert-icon">🚨</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Fake Organic Certificate Detected</div>
+                            <div class="alert-details">Certificate ID "ORG-2024-FAKE789" flagged as fraudulent</div>
+                            <div class="alert-meta">
+                                <span>Batch: LOT2024X999</span>
+                                <span>2 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-item medium">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Certificate Expiry Anomaly</div>
+                            <div class="alert-details">Fair Trade cert shows impossible future renewal date</div>
+                            <div class="alert-meta">
+                                <span>Batch: LOT2024F445</span>
+                                <span>15 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-item medium">
+                        <div class="alert-icon">📋</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Duplicate Certificate ID</div>
+                            <div class="alert-details">Same FSC certificate used by multiple suppliers</div>
+                            <div class="alert-meta">
+                                <span>Suppliers: 3 flagged</span>
+                                <span>32 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-item low">
+                        <div class="alert-icon">📊</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Statistical Anomaly Detected</div>
+                            <div class="alert-details">CO₂ emissions 40% below industry average - verification needed</div>
+                            <div class="alert-meta">
+                                <span>Batch: LOT2024G123</span>
+                                <span>1 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anomaly Detection Panel -->
+            <div class="detection-panel">
+                <div class="panel-title">
+                    🔬 Supply Chain Anomaly Detection
+                    <div class="status-indicator status-warning"></div>
+                </div>
+
+                <div class="detection-stats">
+                    <div class="stat-card">
+                        <div class="stat-value success">847</div>
+                        <div class="stat-label">Batches Monitored</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value warning">34</div>
+                        <div class="stat-label">Anomalies Found</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value danger">12</div>
+                        <div class="stat-label">Require Action</div>
+                    </div>
+                </div>
+
+                <div class="alerts-feed">
+                    <div class="alert-item high">
+                        <div class="alert-icon">🚚</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Impossible Logistics Timeline</div>
+                            <div class="alert-details">Product shows delivery in 2 hours across 500km distance</div>
+                            <div class="alert-meta">
+                                <span>Batch: LOT2024L678</span>
+                                <span>5 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-item medium">
+                        <div class="alert-icon">🌡️</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Temperature Control Anomaly</div>
+                            <div class="alert-details">Perishable goods showing impossible temperature stability</div>
+                            <div class="alert-meta">
+                                <span>Batch: LOT2024T234</span>
+                                <span>18 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-item medium">
+                        <div class="alert-icon">⚖️</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Weight Discrepancy</div>
+                            <div class="alert-details">Final product weight doesn't match raw material inputs</div>
+                            <div class="alert-meta">
+                                <span>Batch: LOT2024W567</span>
+                                <span>45 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-item low">
+                        <div class="alert-icon">📍</div>
+                        <div class="alert-content">
+                            <div class="alert-title">GPS Location Inconsistency</div>
+                            <div class="alert-details">Manufacturing location doesn't match supplier address</div>
+                            <div class="alert-meta">
+                                <span>Supplier: EcoTech Ltd</span>
+                                <span>2 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Fraud Analysis -->
+        <div class="fraud-analysis">
+            <div class="analysis-title">🕵️ Detailed Fraud Case Analysis</div>
+
+            <div class="fraud-case">
+                <div class="case-header">
+                    <div class="case-id">Case ID: FRD-2024-0847</div>
+                    <div class="severity-badge severity-high">HIGH SEVERITY</div>
+                </div>
+
+                <div class="detection-details">
+                    <div class="detail-section">
+                        <div class="detail-title">🎯 AI Detection Triggers</div>
+                        <ul class="detail-list">
+                            <li>Certificate image metadata shows creation date after issue date</li>
+                            <li>Organic certification authority doesn't exist in official registry</li>
+                            <li>Certificate serial number format doesn't match issuer standards</li>
+                            <li>Digital signature verification failed</li>
+                            <li>Supplier location 2,000km from claimed organic farm</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-title">📊 Anomalous Data Points</div>
+                        <ul class="detail-list">
+                            <li>CO₂ emissions: 0.1kg (99% below category average)</li>
+                            <li>Water usage: 0.05L/kg (98% below typical organic cotton)</li>
+                            <li>Processing time: 2 hours (95% faster than industry norm)</li>
+                            <li>Pesticide residue: 0 detected (suspicious for claimed region)</li>
+                            <li>Soil quality data matches another farm's reports exactly</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ai-confidence">
+                    <div class="confidence-score">94.7%</div>
+                    <div class="confidence-label">AI Fraud Confidence Score</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Anomaly Detection Examples -->
+        <div class="anomaly-detection">
+            <div class="analysis-title">⚠️ Active Anomaly Monitoring</div>
+
+            <div class="anomaly-grid">
+                <div class="anomaly-card">
+                    <div class="anomaly-header">
+                        <div class="anomaly-type">Timeline Impossibility</div>
+                        <div class="anomaly-severity">MEDIUM</div>
+                    </div>
+                    <div class="anomaly-description">
+                        Farm harvest date is after manufacturing date, indicating data manipulation or incorrect timestamps.
+                    </div>
+                    <div class="anomaly-data">
+Harvest: 2024-04-25 14:30
+Manufacturing: 2024-04-20 09:15
+Confidence: 87.3%
+                    </div>
+                </div>
+
+                <div class="anomaly-card">
+                    <div class="anomaly-header">
+                        <div class="anomaly-type">Energy Consumption Anomaly</div>
+                        <div class="anomaly-severity">HIGH</div>
+                    </div>
+                    <div class="anomaly-description">
+                        Manufacturing energy consumption is 95% below industry average for this product type and volume.
+                    </div>
+                    <div class="anomaly-data">
+Reported: 0.2 kWh/unit
+Industry Avg: 4.1 kWh/unit
+Deviation: -95.1%
+                    </div>
+                </div>
+
+                <div class="anomaly-card">
+                    <div class="anomaly-header">
+                        <div class="anomaly-type">Transport Speed Violation</div>
+                        <div class="anomaly-severity">MEDIUM</div>
+                    </div>
+                    <div class="anomaly-description">
+                        Product traveled 847km in 3 hours, exceeding maximum possible truck speed including loading/unloading.
+                    </div>
+                    <div class="anomaly-data">
+Distance: 847 km
+Time: 3.2 hours
+Avg Speed: 265 km/h
+Max Truck Speed: 90 km/h
+                    </div>
+                </div>
+
+                <div class="anomaly-card">
+                    <div class="anomaly-header">
+                        <div class="anomaly-type">Batch Size Inconsistency</div>
+                        <div class="anomaly-severity">LOW</div>
+                    </div>
+                    <div class="anomaly-description">
+                        Raw material input quantities don't mathematically produce the reported output quantities.
+                    </div>
+                    <div class="anomaly-data">
+Cotton Input: 100 kg
+T-shirt Output: 500 units
+Expected Output: 200 units
+Efficiency: 250% (impossible)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prevention Actions -->
+        <div class="prevention-actions">
+            <div class="analysis-title">🛡️ Automated Prevention & Response</div>
+
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-icon">🚫</div>
+                    <div class="action-title">Auto-Block Suspicious Batches</div>
+                    <div class="action-description">Automatically prevent fraudulent batches from appearing on marketplace until manual verification</div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">📧</div>
+                    <div class="action-title">Alert Verification Bodies</div>
+                    <div class="action-description">Instantly notify relevant certification authorities about suspected fake certificates</div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">🏴</div>
+                    <div class="action-title">Supplier Account Flagging</div>
+                    <div class="action-description">Mark supplier accounts with repeated fraud attempts for enhanced monitoring</div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">📚</div>
+                    <div class="action-title">Pattern Learning</div>
+                    <div class="action-description">Continuously improve detection algorithms based on confirmed fraud cases</div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">🔍</div>
+                    <div class="action-title">Enhanced Verification</div>
+                    <div class="action-description">Trigger additional verification steps for high-risk batches and suppliers</div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">📉</div>
+                    <div class="action-title">Real-time Scoring Adjustment</div>
+                    <div class="action-description">Automatically lower sustainability scores for anomalous or suspicious data</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ML Insights -->
+        <div class="ml-insights">
+            <div class="insights-title">
+                🧠 Machine Learning Insights
+            </div>
+
+            <div class="insight-item">
+                <strong>Pattern Recognition:</strong> AI has identified 7 common fraud patterns used by suppliers, improving detection rate from 78% to 99.7% over 6 months.
+            </div>
+
+            <div class="insight-item">
+                <strong>Regional Analysis:</strong> 67% of certification fraud attempts originate from suppliers in regions with limited oversight infrastructure.
+            </div>
+
+            <div class="insight-item">
+                <strong>Temporal Patterns:</strong> Fraud attempts increase by 34% during peak buying seasons (Q4) when buyers have less time for manual verification.
+            </div>
+
+            <div class="insight-item">
+                <strong>False Positive Rate:</strong> Current false positive rate of 0.3% ensures legitimate suppliers aren't unfairly penalized by the system.
+            </div>
+
+            <div class="insight-item">
+                <strong>Cross-Reference Success:</strong> 89% of fraud cases are detected through cross-referencing multiple data sources rather than single anomalies.
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/fraud-detection.js"></script>
+</body>
+</html>

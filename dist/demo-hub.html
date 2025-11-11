@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GS1 Sustainability Platform - Demo Hub</title>
+    <link rel="stylesheet" href="/styles/demo-hub.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Main Marketplace</a>
+
+        <div class="header">
+            <h1>🌍 GS1 Sustainability Platform</h1>
+            <p>Explore our comprehensive suite of features for sustainable B2B commerce</p>
+        </div>
+
+        <div class="demos-grid">
+            <!-- Main Marketplace -->
+            <a href="/" class="demo-card">
+                <div class="demo-icon">🏪</div>
+                <div class="demo-title">B2B Marketplace</div>
+                <div class="demo-description">
+                    Browse verified suppliers with AI-powered search and real-time sustainability scores
+                </div>
+                <ul class="demo-features">
+                    <li>Smart supplier matching</li>
+                    <li>AI-powered search intent detection</li>
+                    <li>Multi-criteria filtering</li>
+                    <li>Live sustainability insights</li>
+                </ul>
+                <span class="demo-badge ai">AI-Powered</span>
+            </a>
+
+            <!-- Sustainability Scoring -->
+            <a href="/pages/dynamic-scoring.html" class="demo-card">
+                <div class="demo-icon">📊</div>
+                <div class="demo-title">Dynamic Sustainability Scoring</div>
+                <div class="demo-description">
+                    Real-time A-E grades and 0-100 scores that update with each supply chain event
+                </div>
+                <ul class="demo-features">
+                    <li>Batch-level GS1 Digital Link tracking</li>
+                    <li>Live score recalculation</li>
+                    <li>Multi-factor weighted scoring</li>
+                    <li>Historical comparison</li>
+                </ul>
+                <span class="demo-badge core">Core Feature</span>
+            </a>
+
+            <!-- Product Passport -->
+            <div class="demo-card" onclick="showFeatureDetails('passport')">
+                <div class="demo-icon">📱</div>
+                <div class="demo-title">Live Product Passport</div>
+                <div class="demo-description">
+                    Scan GS1 barcodes to access live sustainability data with complete traceability
+                </div>
+                <ul class="demo-features">
+                    <li>GS1 Digital Link integration</li>
+                    <li>Complete supply chain journey</li>
+                    <li>Real-time data updates</li>
+                    <li>Certification verification</li>
+                </ul>
+                <span class="demo-badge core">Core Feature</span>
+            </div>
+
+            <!-- Predictive Analytics -->
+            <a href="/pages/predictive-sustainability.html" class="demo-card">
+                <div class="demo-icon">🔮</div>
+                <div class="demo-title">Predictive Analytics</div>
+                <div class="demo-description">
+                    AI-powered CO₂ and cost prediction for different delivery methods and routes
+                </div>
+                <ul class="demo-features">
+                    <li>Route optimization AI</li>
+                    <li>Emission predictions</li>
+                    <li>Cost estimation</li>
+                    <li>Real-time condition factors</li>
+                </ul>
+                <span class="demo-badge ai">AI-Powered</span>
+            </a>
+
+            <!-- Fraud Detection -->
+            <a href="/pages/fraud-detection.html" class="demo-card">
+                <div class="demo-icon">🛡️</div>
+                <div class="demo-title">AI Fraud Detection</div>
+                <div class="demo-description">
+                    Advanced ML algorithms detect certification fraud and supply chain anomalies
+                </div>
+                <ul class="demo-features">
+                    <li>99.7% detection accuracy</li>
+                    <li>Real-time certificate verification</li>
+                    <li>Pattern recognition</li>
+                    <li>Automated blocking</li>
+                </ul>
+                <span class="demo-badge ai">AI-Powered</span>
+            </a>
+
+            <!-- API Documentation -->
+            <div class="demo-card" onclick="showFeatureDetails('api')">
+                <div class="demo-icon">🔌</div>
+                <div class="demo-title">API & Integration</div>
+                <div class="demo-description">
+                    Comprehensive APIs and SDKs to integrate sustainability tracking into your systems
+                </div>
+                <ul class="demo-features">
+                    <li>RESTful API endpoints</li>
+                    <li>Real-time webhooks</li>
+                    <li>GS1 Digital Link integration</li>
+                    <li>SDK libraries</li>
+                </ul>
+                <span class="demo-badge">Documentation</span>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h2>🚀 Built for the Hackathon</h2>
+            <p>
+                This platform demonstrates how GS1 standards can transform B2B sustainability commerce with AI-powered features,
+                real-time tracking, and complete supply chain transparency.
+            </p>
+        </div>
+    </div>
+
+    <script src="/scripts/demo-hub.js"></script>
+</body>
+</html>

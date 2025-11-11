@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 interface HeaderProps {
   onSearch: (query: string) => void
@@ -11,7 +12,7 @@ function Header({ onSearch }: HeaderProps) {
     onSearch(searchQuery)
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSearch()
     }
@@ -31,7 +32,7 @@ function Header({ onSearch }: HeaderProps) {
               placeholder="Search suppliers, products, or sustainability certifications..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
             />
             <button className="search-btn" onClick={handleSearch}>
               🔍 Search
@@ -44,11 +45,11 @@ function Header({ onSearch }: HeaderProps) {
           </div>
         </div>
         <div className="nav-tabs">
-          <a href="/" className="nav-tab active">🏠 Suppliers</a>
+          <Link to="/" className="nav-tab active">🏠 Suppliers</Link>
+          <Link to="/predictive-analytics" className="nav-tab">🔮 Predictive Analytics</Link>
           <a href="/demo-hub.html" className="nav-tab">🎯 All Features</a>
           <a href="#" className="nav-tab">📦 Products</a>
           <a href="#" className="nav-tab">🔬 Verification</a>
-          <a href="#" className="nav-tab">📈 Analytics</a>
         </div>
       </div>
     </div>

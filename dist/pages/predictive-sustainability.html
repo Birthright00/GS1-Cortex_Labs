@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Sustainability - CO₂ & Cost Estimation</title>
+    <link rel="stylesheet" href="/styles/predictive-sustainability.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <a href="/">← Back to Marketplace</a>
+        <a href="/demo-hub.html">All Features</a>
+        <a href="/pages/fraud-detection.html">Fraud Detection</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔮 Predictive Sustainability Analytics</h1>
+            <p>AI-powered CO₂ and cost estimation based on delivery methods, routes, and real-time conditions</p>
+        </div>
+
+        <!-- Prediction Dashboard -->
+        <div class="prediction-dashboard">
+            <!-- Order Input -->
+            <div class="order-input">
+                <div class="input-title">
+                    📦 Order Details
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Product & Quantity</label>
+                    <select class="form-select">
+                        <option>Organic Cotton T-Shirts - 500 units</option>
+                        <option>Biodegradable Packaging - 2,000 units</option>
+                        <option>Solar Power Banks - 100 units</option>
+                        <option>LED Light Bulbs - 1,000 units</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">From (Supplier Location)</label>
+                    <div class="location-display">
+                        📍 Jakarta, Indonesia
+                        <div class="distance-badge">1,247 km</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">To (Delivery Destination)</label>
+                    <input type="text" class="form-input" value="Singapore" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Required Delivery Date</label>
+                    <input type="date" class="form-input" value="2024-12-15">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Priority Level</label>
+                    <select class="form-select">
+                        <option>Standard</option>
+                        <option>Urgent</option>
+                        <option>Economy</option>
+                        <option>Express</option>
+                    </select>
+                </div>
+
+                <button class="predict-btn" onclick="updatePredictions()">
+                    🔮 Generate AI Predictions
+                </button>
+            </div>
+
+            <!-- Predictions Panel -->
+            <div class="predictions-panel">
+                <div class="panel-title">
+                    🚚 Delivery Method Predictions
+                </div>
+
+                <div class="delivery-options">
+                    <!-- Option 1: Electric Truck -->
+                    <div class="delivery-option recommended">
+                        <div class="recommended-badge">AI RECOMMENDED</div>
+                        <div class="delivery-header">
+                            <div class="delivery-method">
+                                <span class="method-icon">🚛</span>
+                                Electric Truck + Sea Freight
+                            </div>
+                            <div class="delivery-time">5-7 days</div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value co2">1.8kg</div>
+                                <div class="metric-label">CO₂ per unit</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value cost">$12.40</div>
+                                <div class="metric-label">Shipping cost</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value efficiency">94%</div>
+                                <div class="metric-label">Route efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value time">6.2</div>
+                                <div class="metric-label">Days avg</div>
+                            </div>
+                        </div>
+
+                        <div class="sustainability-impact">
+                            <div class="impact-score score-a">Grade A</div>
+                            <span>23% lower CO₂ than standard truck delivery</span>
+                        </div>
+                    </div>
+
+                    <!-- Option 2: Standard Truck -->
+                    <div class="delivery-option">
+                        <div class="delivery-header">
+                            <div class="delivery-method">
+                                <span class="method-icon">🚚</span>
+                                Standard Truck Direct
+                            </div>
+                            <div class="delivery-time">3-4 days</div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value co2">2.7kg</div>
+                                <div class="metric-label">CO₂ per unit</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value cost">$18.90</div>
+                                <div class="metric-label">Shipping cost</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value efficiency">78%</div>
+                                <div class="metric-label">Route efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value time">3.5</div>
+                                <div class="metric-label">Days avg</div>
+                            </div>
+                        </div>
+
+                        <div class="sustainability-impact">
+                            <div class="impact-score score-b">Grade B</div>
+                            <span>Faster delivery but 50% higher emissions</span>
+                        </div>
+                    </div>
+
+                    <!-- Option 3: Air Freight -->
+                    <div class="delivery-option">
+                        <div class="delivery-header">
+                            <div class="delivery-method">
+                                <span class="method-icon">✈️</span>
+                                Air Freight Express
+                            </div>
+                            <div class="delivery-time">1-2 days</div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value co2">8.4kg</div>
+                                <div class="metric-label">CO₂ per unit</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value cost">$45.60</div>
+                                <div class="metric-label">Shipping cost</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value efficiency">92%</div>
+                                <div class="metric-label">Route efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value time">1.3</div>
+                                <div class="metric-label">Days avg</div>
+                            </div>
+                        </div>
+
+                        <div class="sustainability-impact">
+                            <div class="impact-score score-d">Grade D</div>
+                            <span>Fastest delivery but 367% higher CO₂ emissions</span>
+                        </div>
+                    </div>
+
+                    <!-- Option 4: Rail + Electric -->
+                    <div class="delivery-option">
+                        <div class="delivery-header">
+                            <div class="delivery-method">
+                                <span class="method-icon">🚆</span>
+                                Rail + Electric Last Mile
+                            </div>
+                            <div class="delivery-time">7-9 days</div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value co2">1.2kg</div>
+                                <div class="metric-label">CO₂ per unit</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value cost">$9.80</div>
+                                <div class="metric-label">Shipping cost</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value efficiency">89%</div>
+                                <div class="metric-label">Route efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value time">8.1</div>
+                                <div class="metric-label">Days avg</div>
+                            </div>
+                        </div>
+
+                        <div class="sustainability-impact">
+                            <div class="impact-score score-a">Grade A+</div>
+                            <span>Lowest emissions option - 55% below standard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/predictive-sustainability.js"></script>
+</body>
+</html>
